@@ -568,6 +568,8 @@ components:
       description: "Идентификатор маршрутной заявки."
       schema:
         type: array
+        minItems: 1
+        maxItems: 100
         items:
           $ref: "#/components/schemas/BatchID"
       style: form
@@ -667,6 +669,8 @@ components:
       properties:
         claim_ids:
           type: array
+          minItems: 1
+          maxItems: 1000
           items:
             $ref: '#/components/schemas/ClaimID'
     request.CreatePretension:
@@ -738,6 +742,8 @@ components:
         route_points:
           description: 'Точки получения заказа и назначения.'
           type: array
+          minItems: 1
+          maxItems: 100
           items:
             $ref: '#/components/schemas/BatchRoutePoint'
           x-oapi-codegen-extra-tags:
@@ -780,35 +786,44 @@ components:
         route_points:
           description: 'Точки получения заказа и назначения.'
           type: array
+          minItems: 1
+          maxItems: 100
           items:
             $ref: '#/components/schemas/BatchRoutePoint'
           x-oapi-codegen-extra-tags:
             validate: required,len=2,dive
     response.CreateClaim:
+      type: object
       required:
         - claim_id
-      type: object
+      additionalProperties: false
       properties:
         claim_id:
           $ref: '#/components/schemas/ClaimID'
     response.CancelClaim:
+      type: object
       required:
         - claim_id
-      type: object
+      additionalProperties: false
       properties:
         claim_id:
           $ref: '#/components/schemas/ClaimID'
     response.ClaimsInfo:
+      type: object
       required:
         - claims
-      type: object
+      additionalProperties: false
       properties:
         claims:
           type: array
+          minItems: 1
+          maxItems: 100
           items:
             $ref: '#/components/schemas/Claim'
     response.UpdateClaims:
       type: array
+      minItems: 1
+      maxItems: 100
       items:
         $ref: '#/components/schemas/UpdateClaimStatus'
     response.EstimateClaim:
@@ -834,6 +849,7 @@ components:
         details:
           type: array
           minItems: 1
+          maxItems: 1000
           items:
             type: string
             description: Описание
@@ -865,6 +881,8 @@ components:
           type: string
     response.ClaimsEvents:
       type: array
+      maxItems: 1000
+      minItems: 1
       items:
         $ref: '#/components/schemas/ClaimsEvent'
     response.CreateBatch:
@@ -872,17 +890,32 @@ components:
     response.EstimateBatch:
       type: object
       required:
-        - weight
-        - distance
+        - arrival_cost
+        - total_cost
+        - total_cost_with_vat
       properties:
-        distance:
-          description: 'Суммарное расстояние от точки А до конечной точки доставки в метрах'
+        arrival_cost:
+          description: 'Стоимость подачи курьера в копейках'
+          type: integer
+          example: 50000
+        distance_cost:
+          description: 'Стоимость расстояния от точки А до конечной точки доставки в копейках'
+          additionalProperties: true
           type: integer
           example: 15000
-        weight:
-          description: 'Суммарный вес всех заказов в граммах'
+        weight_cost:
+          description: 'Стоимость общего веса товаров в заказе в копейках'
+          additionalProperties: true
           type: integer
           example: 3000
+        total_cost:
+          description: "Суммарная стоимость доставки в копейках"
+          type: integer
+          example: 250000
+        total_cost_with_vat:
+          description: "Суммарная стоимость доставки в копейках (с учетом НДС)"
+          type: integer
+          example: 250000
     response.GetBatch:
       $ref: '#/components/schemas/Batch'
     response.GetBatches:
@@ -890,8 +923,10 @@ components:
       required:
         - batches
       properties:
-        claims:
+        batches:
           type: array
+          maxItems: 1000
+          minItems: 1
           items:
             $ref: '#/components/schemas/Batch'
     ClaimID:
