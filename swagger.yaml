@@ -3,7 +3,7 @@ info:
   title: Last Mile OMS service API
   description: Last Mile OMS service API
   contact: {}
-  version: 0.5.3
+  version: 0.5.4
 servers:
   - url: https://b2b-api-gateway.uat.ya.magnit.ru/api/
     description: Демо сервер для проведения тестирования интеграции.
@@ -11,7 +11,6 @@ servers:
     description: Основной сервер интеграции.
 security:
   - bearerAuth: []
-
 paths:
   /v2/oauth/token:
     post:
@@ -601,7 +600,6 @@ components:
       description: 'Номер страницы'
       schema:
         type: integer
-        x-go-type: int
       x-oapi-codegen-extra-tags:
         validate: omitempty,gt=0
     query.PageSize:
@@ -610,7 +608,6 @@ components:
       description: 'Номер страницы'
       schema:
         type: integer
-        x-go-type: int
       x-oapi-codegen-extra-tags:
         validate: omitempty,gt=0
     query.OrderBy:
@@ -867,6 +864,7 @@ components:
             - too_high_delivery_distance
             - too_heavy_cargo
             - out_of_working_time
+            - other
         details:
           description: 'Детали ошибки'
           type: string
@@ -956,7 +954,8 @@ components:
           - cancelled - заказ был отменен со стороны партнера (бесплатная отмена).
           - cancelled_with_payment - заказ был отменен со стороны партнера (платная отмена).
           - cancelled_by_service - заказ был отменен со стороны сервиса доставки. Причина отмены в поле cancel_reason.
-           -return_finished - курьер вернул заказ в точку А
+          - return_finished - курьер вернул заказ в точку А
+          - return_failed - курьер не смог вернуть заказ в точку А
       enum:
         - created
         - estimating
@@ -1583,7 +1582,16 @@ components:
         batch_id:
           type: string
           format: uuid
-          x-go-type: uuid.UUID
+        status:
+          type: string
+          description: 'Статус маршрутной заявки'
+          enum:
+            - created
+            - estimated
+            - in_progress
+            - delivered_partially
+            - delivered
+            - cancelled
         estimation:
           $ref: '#/components/schemas/BatchEstimation'
         claims:
@@ -1693,9 +1701,6 @@ components:
     BatchID:
       type: string
       format: uuid
-      x-go-type: uuid.UUID
-      x-oapi-codegen-extra-tags:
-        validate: required,min=1,dive
 
     OauthToken:
       type: object
