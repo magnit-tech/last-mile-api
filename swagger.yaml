@@ -771,7 +771,6 @@ components:
         partner_id:
           description: "Идентификатор партнера из ГИС КЦ"
           type: string
-
     request.EstimateBatch:
       type: object
       required:
@@ -975,6 +974,7 @@ components:
         - cancelled_with_payment
         - cancelled_by_service
         - return_finished
+        - return_failed
     ClaimState:
       required:
         - status
@@ -1584,7 +1584,15 @@ components:
           format: uuid
         status:
           type: string
-          description: 'Статус маршрутной заявки'
+          example: created
+          description: |
+            Статус маршрутной заявки:
+              - created - заявка создана
+              - estimated - заявка оцененна
+              - in_progress - заявка в процессе
+              - delivered_partially - заказ частично доставлен
+              - delivered - заказ доставлен
+              - cancelled - заявка отменена
           enum:
             - created
             - estimated
@@ -1697,11 +1705,9 @@ components:
                 message: "Не удалось найти курьера"
             meta:
               external_order_uuid: "5f2c5ffa-0736-4677-b203-0250e346e906"
-
     BatchID:
       type: string
       format: uuid
-
     OauthToken:
       type: object
       required:
