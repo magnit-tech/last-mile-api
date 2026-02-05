@@ -60,6 +60,7 @@ paths:
           schema:
             $ref: "#/components/schemas/param.IdempotencyKey"
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -85,6 +86,7 @@ paths:
       summary: Отменить заявку
       operationId: CancelClaim
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -106,6 +108,7 @@ paths:
       summary: Информация по заявкам
       operationId: ClaimsInfo
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -183,6 +186,7 @@ paths:
       description: Принять заявку на доставку после расчета стоимости
       operationId: AcceptClaim
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -207,6 +211,7 @@ paths:
         Доступен для source точки до статуса pickup_arrived.
         Для destination точки доступна до статуса delivery_finished.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -245,6 +250,7 @@ paths:
       description: |
         Передать информацию о том что заказ готов к выдаче.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -278,6 +284,7 @@ paths:
       description: Оценка стоимости достави по заявке
       summary: Оценка заявки
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -320,6 +327,7 @@ paths:
       description: Создать претензию
       summary: Создать претензию
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -420,6 +428,7 @@ paths:
           schema:
             $ref: "#/components/schemas/param.IdempotencyKey"
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -538,6 +547,7 @@ paths:
       description: Оценка стоимости доставки по маршрутной заявке
       summary: Оценка маршрутной заявки
       requestBody:
+        required: true
         content:
           application/json:
             schema:
