@@ -182,7 +182,7 @@ paths:
           description: Internal Server Error
   /v1/last-mile/claims/accept:
     post:
-      summary: Уакцптовать заявку на доставку
+      summary: Акцптовать заявку на доставку
       description: Принять заявку на доставку после расчета стоимости
       operationId: AcceptClaim
       requestBody:
