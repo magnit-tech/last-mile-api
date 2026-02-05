@@ -21,7 +21,7 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/OauthRequest'
+              $ref: "#/components/schemas/OauthRequest"
       responses:
         200:
           description: Успешный ответ
@@ -34,17 +34,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OauthError'
+                $ref: "#/components/schemas/OauthError"
         401:
           description: "Ошибка авторизации. В запросе не указан или указан несуществующий client_id"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OauthError'
+                $ref: "#/components/schemas/OauthError"
         500:
-          description: 'Internal Server Error'
+          description: "Internal Server Error"
         503:
-          description: 'Internal Server Error'
+          description: "Internal Server Error"
   /v1/last-mile/claims/create:
     post:
       description: Создание заявки на доставку
@@ -57,25 +57,25 @@ paths:
           style: form
           explode: true
           schema:
-            $ref: '#/components/schemas/param.IdempotencyKey'
+            $ref: "#/components/schemas/param.IdempotencyKey"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/request.CreateClaim'
+              $ref: "#/components/schemas/request.CreateClaim"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.CreateClaim'
+                $ref: "#/components/schemas/response.CreateClaim"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
+                $ref: "#/components/schemas/response.BadRequest"
         "500":
           description: Internal Server Error
   /v1/last-mile/claims/cancel:
@@ -86,14 +86,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/request.CancelClaim'
+              $ref: "#/components/schemas/request.CancelClaim"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.CancelClaim'
+                $ref: "#/components/schemas/response.CancelClaim"
         "400":
           description: Bad Request
         "500":
@@ -106,32 +106,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/request.ClaimsInfo'
+              $ref: "#/components/schemas/request.ClaimsInfo"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.ClaimsInfo'
+                $ref: "#/components/schemas/response.ClaimsInfo"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '404':
-          description: 'Not Found'
+                $ref: "#/components/schemas/response.BadRequest"
+        "404":
+          description: "Not Found"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.NotFound'
+                $ref: "#/components/schemas/response.NotFound"
         "409":
           description: Conflict
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.Conflict'
+                $ref: "#/components/schemas/response.Conflict"
         "500":
           description: Internal Server Error
   /v1/last-mile/claims/events:
@@ -147,7 +147,7 @@ paths:
           style: form
           explode: true
           schema:
-            $ref: '#/components/schemas/param.EventID'
+            $ref: "#/components/schemas/param.EventID"
         - name: limit
           in: query
           description: Максимальное количество событий в результатах.
@@ -164,35 +164,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.ClaimsEvents'
+                $ref: "#/components/schemas/response.ClaimsEvents"
         "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
+                $ref: "#/components/schemas/response.BadRequest"
         "500":
           description: Internal Server Error
   /v1/last-mile/claims/accept:
     post:
       operationId: AcceptClaim
-      description: 'Принять заявку на доставку после расчета стоимости'
+      description: "Принять заявку на доставку после расчета стоимости"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/request.AcceptClaim'
+              $ref: "#/components/schemas/request.AcceptClaim"
       responses:
-        '200':
-          description: 'OK'
-        '400':
-          description: 'Bad Request'
+        "200":
+          description: "OK"
+        "400":
+          description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.BadRequest"
+        "500":
+          description: "Internal Server Error"
   /v1/last-mile/claims/update:
     patch:
       operationId: UpdateClaim
@@ -202,34 +202,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/request.UpdateClaims'
+              $ref: "#/components/schemas/request.UpdateClaims"
       responses:
-        '200':
-          description: 'OK'
+        "200":
+          description: "OK"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.UpdateClaims'
-        '400':
-          description: 'Bad Request'
+                $ref: "#/components/schemas/response.UpdateClaims"
+        "400":
+          description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '404':
-          description: 'Not Found'
+                $ref: "#/components/schemas/response.BadRequest"
+        "404":
+          description: "Not Found"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.NotFound'
-        '409':
-          description: 'Conflict'
+                $ref: "#/components/schemas/response.NotFound"
+        "409":
+          description: "Conflict"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.Conflict'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.Conflict"
+        "500":
+          description: "Internal Server Error"
   /v1/last-mile/claims/set-ready:
     patch:
       operationId: SetReady
@@ -240,72 +240,72 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/request.SetReady'
+              $ref: "#/components/schemas/request.SetReady"
       responses:
-        '204':
-          description: 'No Content'
-        '400':
-          description: 'Bad Request'
+        "204":
+          description: "No Content"
+        "400":
+          description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '404':
-          description: 'Not Found'
+                $ref: "#/components/schemas/response.BadRequest"
+        "404":
+          description: "Not Found"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.NotFound'
-        '409':
-          description: 'Conflict'
+                $ref: "#/components/schemas/response.NotFound"
+        "409":
+          description: "Conflict"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.Conflict'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.Conflict"
+        "500":
+          description: "Internal Server Error"
   /v1/last-mile/claims/estimate:
     post:
       operationId: EstimateClaim
-      description: 'Оценка заявки'
+      description: "Оценка заявки"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/request.EstimateClaim'
+              $ref: "#/components/schemas/request.CreateClaim"
       responses:
-        '200':
-          description: 'OK'
+        "200":
+          description: "OK"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.EstimateClaim'
-        '400':
-          description: 'Bad Request'
+                $ref: "#/components/schemas/response.EstimateClaim"
+        "400":
+          description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '404':
-          description: 'Not Found'
+                $ref: "#/components/schemas/response.BadRequest"
+        "404":
+          description: "Not Found"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.NotFound'
-        '409':
-          description: 'Conflict'
+                $ref: "#/components/schemas/response.NotFound"
+        "409":
+          description: "Conflict"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.Conflict'
-        '422':
-          description: 'Unprocessable Entity'
+                $ref: "#/components/schemas/response.Conflict"
+        "422":
+          description: "Unprocessable Entity"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.UnprocessableClaim'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.UnprocessableClaim"
+        "500":
+          description: "Internal Server Error"
   /v1/last-mile/pretensions:
     post:
       description: "Создать претензию"
@@ -313,58 +313,58 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/request.CreatePretension'
+              $ref: "#/components/schemas/request.CreatePretension"
       responses:
-        '201':
-          description: 'Created'
-        '401':
-          description: 'Unauthorized'
-        '400':
-          description: 'Bad Request'
+        "201":
+          description: "Created"
+        "401":
+          description: "Unauthorized"
+        "400":
+          description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.BadRequest"
+        "500":
+          description: "Internal Server Error"
   /v1/last-mile/courier/location:
     get:
       operationId: CourierLocation
-      description: 'Получить координаты курьера по заявке'
+      description: "Получить координаты курьера по заявке"
       parameters:
         - in: query
           name: claimId
           description: ID заявки
           required: true
           schema:
-            $ref: '#/components/schemas/param.ClaimID'
+            $ref: "#/components/schemas/param.ClaimID"
       responses:
-        '200':
-          description: 'OK'
+        "200":
+          description: "OK"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Coordinates'
-        '400':
-          description: 'Bad Request'
+                $ref: "#/components/schemas/Coordinates"
+        "400":
+          description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '404':
-          description: 'NotFound'
+                $ref: "#/components/schemas/response.BadRequest"
+        "404":
+          description: "NotFound"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.NotFound'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.NotFound"
+        "500":
+          description: "Internal Server Error"
   /v1/last-mile/batches:
     get:
       operationId: GetBatchesInfo
-      description: 'Получение информации по маршрутным заявкам'
+      description: "Получение информации по маршрутным заявкам"
       parameters:
-        - $ref: '#/components/parameters/query.BatchIDs'
+        - $ref: "#/components/parameters/query.BatchIDs"
         - $ref: "#/components/parameters/query.From"
         - $ref: "#/components/parameters/query.To"
         - $ref: "#/components/parameters/query.Page"
@@ -372,79 +372,79 @@ paths:
         - $ref: "#/components/parameters/query.OrderByCreatedDate"
         - $ref: "#/components/parameters/query.OrderDirection"
       responses:
-        '200':
-          description: 'OK'
+        "200":
+          description: "OK"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.GetBatches'
-        '400':
-          description: 'Bad Request'
+                $ref: "#/components/schemas/response.GetBatches"
+        "400":
+          description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '404':
-          description: 'Not Found'
+                $ref: "#/components/schemas/response.BadRequest"
+        "404":
+          description: "Not Found"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.NotFound'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.NotFound"
+        "500":
+          description: "Internal Server Error"
           content:
             application/json:
               schema:
                 type: string
     post:
       operationId: CreateBatch
-      description: 'Создание маршрутной заявки на доставку'
+      description: "Создание маршрутной заявки на доставку"
       parameters:
         - in: query
           name: request_id
-          description: 'Ключ идемпотентности запроса'
+          description: "Ключ идемпотентности запроса"
           required: true
           schema:
-            $ref: '#/components/schemas/param.IdempotencyKey'
+            $ref: "#/components/schemas/param.IdempotencyKey"
           x-oapi-codegen-extra-tags:
             validate: required,gt=10,lt=100
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/request.CreateBatch'
+              $ref: "#/components/schemas/request.CreateBatch"
       responses:
-        '201':
+        "201":
           headers:
             Location:
-              description: 'Путь до созданного батча'
+              description: "Путь до созданного батча"
               schema:
                 type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.CreateBatch'
-          description: 'Created'
-        '400':
+                $ref: "#/components/schemas/response.CreateBatch"
+          description: "Created"
+        "400":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/response.BadRequest"
-          description: 'Bad Request'
-        '409':
+          description: "Bad Request"
+        "409":
           description: "Conflict"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/response.Conflict"
-        '422':
-          description: 'Unprocessable Entity'
+        "422":
+          description: "Unprocessable Entity"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.UnprocessableClaim'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.UnprocessableClaim"
+        "500":
+          description: "Internal Server Error"
           content:
             application/json:
               schema:
@@ -452,30 +452,30 @@ paths:
   /v1/last-mile/batches/{batch_id}:
     get:
       operationId: GetBatchByID
-      description: 'Получение информации по маршрутной заявке'
+      description: "Получение информации по маршрутной заявке"
       parameters:
-        - $ref: '#/components/parameters/path.BatchID'
+        - $ref: "#/components/parameters/path.BatchID"
       responses:
-        '200':
-          description: 'OK'
+        "200":
+          description: "OK"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.GetBatch'
-        '400':
-          description: 'Bad Request'
+                $ref: "#/components/schemas/response.GetBatch"
+        "400":
+          description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '404':
-          description: 'Not Found'
+                $ref: "#/components/schemas/response.BadRequest"
+        "404":
+          description: "Not Found"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.NotFound'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.NotFound"
+        "500":
+          description: "Internal Server Error"
           content:
             application/json:
               schema:
@@ -483,38 +483,38 @@ paths:
   /v1/last-mile/batches/{batch_id}/accept:
     post:
       operationId: AcceptBatch
-      description: 'Подтверждение маршрутной заявки'
+      description: "Подтверждение маршрутной заявки"
       parameters:
-        - $ref: '#/components/parameters/path.BatchID'
+        - $ref: "#/components/parameters/path.BatchID"
       responses:
-        '200':
-          description: 'OK'
-        '400':
-          description: 'Bad Request'
+        "200":
+          description: "OK"
+        "400":
+          description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '404':
-          description: 'Not Found'
+                $ref: "#/components/schemas/response.BadRequest"
+        "404":
+          description: "Not Found"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.NotFound'
-        '409':
+                $ref: "#/components/schemas/response.NotFound"
+        "409":
           description: "Conflict"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/response.Conflict"
-        '422':
-          description: 'Unprocessable Entity'
+        "422":
+          description: "Unprocessable Entity"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.UnprocessableClaim'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.UnprocessableClaim"
+        "500":
+          description: "Internal Server Error"
           content:
             application/json:
               schema:
@@ -522,39 +522,39 @@ paths:
   /v1/last-mile/batches/estimate:
     post:
       operationId: EstimateBatch
-      description: 'Оценка маршрутной заявки'
+      description: "Оценка маршрутной заявки"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/request.EstimateBatch'
+              $ref: "#/components/schemas/request.EstimateBatch"
       responses:
-        '200':
-          description: 'OK'
+        "200":
+          description: "OK"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.EstimateBatch'
-        '400':
-          description: 'Bad Request'
+                $ref: "#/components/schemas/response.EstimateBatch"
+        "400":
+          description: "Bad Request"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '404':
-          description: 'Not Found'
+                $ref: "#/components/schemas/response.BadRequest"
+        "404":
+          description: "Not Found"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.NotFound'
-        '422':
-          description: 'Unprocessable Entity'
+                $ref: "#/components/schemas/response.NotFound"
+        "422":
+          description: "Unprocessable Entity"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/response.UnprocessableClaim'
-        '500':
-          description: 'Internal Server Error'
+                $ref: "#/components/schemas/response.UnprocessableClaim"
+        "500":
+          description: "Internal Server Error"
           content:
             application/json:
               schema:
@@ -580,8 +580,6 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/BatchID"
-      x-oapi-codegen-extra-tags:
-        validate: required
     query.From:
       in: query
       name: from
@@ -597,23 +595,19 @@ components:
     query.Page:
       in: query
       name: page
-      description: 'Номер страницы'
+      description: "Номер страницы"
       schema:
         type: integer
-      x-oapi-codegen-extra-tags:
-        validate: omitempty,gt=0
     query.PageSize:
       in: query
       name: pageSize
-      description: 'Номер страницы'
+      description: "Номер страницы"
       schema:
         type: integer
-      x-oapi-codegen-extra-tags:
-        validate: omitempty,gt=0
     query.OrderBy:
       in: query
       name: orderBy
-      description: 'Отсортировать вывод по'
+      description: "Отсортировать вывод по"
       schema:
         type: string
         enum:
@@ -624,7 +618,7 @@ components:
     query.OrderByCreatedDate:
       in: query
       name: orderBy
-      description: 'Отсортировать вывод по дате создания'
+      description: "Отсортировать вывод по дате создания"
       required: false
       schema:
         type: string
@@ -633,7 +627,7 @@ components:
     query.OrderDirection:
       in: query
       name: orderDirection
-      description: 'Отсортировать вывод по возрастанию/убыванию'
+      description: "Отсортировать вывод по возрастанию/убыванию"
       schema:
         type: string
         enum:
@@ -649,16 +643,16 @@ components:
       type: string
       format: uuid
     request.CreateClaim:
-      $ref: '#/components/schemas/Claim'
+      $ref: "#/components/schemas/Claim"
     request.CancelClaim:
       required:
         - claim_id
       type: object
       properties:
         claim_id:
-          $ref: '#/components/schemas/ClaimID'
+          $ref: "#/components/schemas/ClaimID"
         cancel_reason:
-          $ref: '#/components/schemas/CancelByPartnerReason'
+          $ref: "#/components/schemas/CancelByPartnerReason"
     request.ClaimsInfo:
       required:
         - claim_ids
@@ -669,7 +663,7 @@ components:
           minItems: 1
           maxItems: 1000
           items:
-            $ref: '#/components/schemas/ClaimID'
+            $ref: "#/components/schemas/ClaimID"
     request.CreatePretension:
       type: object
       required:
@@ -678,50 +672,62 @@ components:
         - type
       properties:
         claim_id:
-          $ref: '#/components/schemas/ClaimID'
+          $ref: "#/components/schemas/ClaimID"
         text:
-          description: 'Текст претензии'
+          description: "Текст претензии"
           type: string
           minLength: 1
-          x-oapi-codegen-extra-tags:
-            validate: required,min=1
         type:
-          $ref: '#/components/schemas/PretensionType'
+          $ref: "#/components/schemas/PretensionType"
         photo:
-          description: 'Фото товаров (gif, jpg, tiff, png, web, bmp)'
+          description: "Фото товаров (gif, jpg, tiff, png, web, bmp)"
           type: string
           format: binary
           maxLength: 5242880
-          x-oapi-codegen-extra-tags:
-            validate: omitempty,max=5242880
         check:
-          description: 'Фото чека/товарной накладной (gif, jpg, tiff, png, web, bmp)'
+          description: "Фото чека/товарной накладной (gif, jpg, tiff, png, web, bmp)"
           type: string
           format: binary
-          maxLength: 5242880  # 5 MB в байтах
-          x-oapi-codegen-extra-tags:
-            validate: omitempty,max=5242880
+          maxLength: 5242880 # 5 MB в байтах
     request.AcceptClaim:
       type: object
       required:
         - claim_id
       properties:
         claim_id:
-          $ref: '#/components/schemas/ClaimID'
+          $ref: "#/components/schemas/ClaimID"
     request.UpdateClaims:
       type: array
       minItems: 1
       maxItems: 100
       items:
-        $ref: '#/components/schemas/UpdateClaim'
+        $ref: "#/components/schemas/UpdateClaim"
     request.SetReady:
       type: array
       minItems: 1
       maxItems: 100
       items:
-        $ref: '#/components/schemas/SetReady'
+        $ref: "#/components/schemas/SetReady"
     request.EstimateClaim:
-      $ref: '#/components/schemas/Claim'
+      type: object
+      properties:
+        cost:
+          type: integer
+          example: 21400
+          description: Стоимость доставки (в копейках)
+        cost_with_vat:
+          type: integer
+          example: 25680
+          description: Стоимость доствки с НДС (в копейках)
+        distance:
+          type: integer
+          example: 3025
+          description: Расстояние в метрах
+        estimated_arrival:
+          type: string
+          example: 2026-02-05T15:04:20Z
+          description: "Ожидаемое время доставки в формате (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)"
+
     request.CreateBatch:
       type: object
       required:
@@ -732,26 +738,22 @@ components:
         external_order_id:
           description: Номер заказа в системе партнера, по которому курьер сможет получить его в магазине
           type: string
-          x-oapi-codegen-extra-tags:
-            validate: required
         items:
           $ref: "#/components/schemas/BatchItems"
         route_points:
-          description: 'Точки получения заказа и назначения.'
+          description: "Точки получения заказа и назначения."
           type: array
           minItems: 1
           maxItems: 100
           items:
-            $ref: '#/components/schemas/BatchRoutePoint'
-          x-oapi-codegen-extra-tags:
-            validate: required,len=2,dive
+            $ref: "#/components/schemas/BatchRoutePoint"
         due_time:
-          $ref: '#/components/schemas/DateTime'
+          $ref: "#/components/schemas/DateTime"
         need_return:
-          description: 'Нужна ли обратная доставка в случае, если заказ доставить не удалось'
+          description: "Нужна ли обратная доставка в случае, если заказ доставить не удалось"
           type: boolean
         need_drop_off_code:
-          description: 'Нужен ли код подтверждения в точке Б'
+          description: "Нужен ли код подтверждения в точке Б"
           type: boolean
         need_pickup_code:
           description: |
@@ -760,7 +762,7 @@ components:
             если он указан в поле transfer_code для точки получения заказа. В таком случае курьер называет код вслух
           type: boolean
         is_bag_required:
-          description: 'Нужен ли курьер с термо-сумкой'
+          description: "Нужен ли курьер с термо-сумкой"
           type: boolean
         comment:
           description: Комментарий к заказу
@@ -771,6 +773,7 @@ components:
         partner_id:
           description: "Идентификатор партнера из ГИС КЦ"
           type: string
+
     request.EstimateBatch:
       type: object
       required:
@@ -780,14 +783,12 @@ components:
         items:
           $ref: "#/components/schemas/Items"
         route_points:
-          description: 'Точки получения заказа и назначения.'
+          description: "Точки получения заказа и назначения."
           type: array
           minItems: 1
           maxItems: 100
           items:
-            $ref: '#/components/schemas/BatchRoutePoint'
-          x-oapi-codegen-extra-tags:
-            validate: required,len=2,dive
+            $ref: "#/components/schemas/BatchRoutePoint"
     response.CreateClaim:
       type: object
       required:
@@ -795,7 +796,7 @@ components:
       additionalProperties: false
       properties:
         claim_id:
-          $ref: '#/components/schemas/ClaimID'
+          $ref: "#/components/schemas/ClaimID"
     response.CancelClaim:
       type: object
       required:
@@ -803,7 +804,7 @@ components:
       additionalProperties: false
       properties:
         claim_id:
-          $ref: '#/components/schemas/ClaimID'
+          $ref: "#/components/schemas/ClaimID"
     response.ClaimsInfo:
       type: object
       required:
@@ -815,15 +816,15 @@ components:
           minItems: 1
           maxItems: 100
           items:
-            $ref: '#/components/schemas/Claim'
+            $ref: "#/components/schemas/Claim"
     response.UpdateClaims:
       type: array
       minItems: 1
       maxItems: 100
       items:
-        $ref: '#/components/schemas/UpdateClaimStatus'
+        $ref: "#/components/schemas/UpdateClaimStatus"
     response.EstimateClaim:
-      $ref: '#/components/schemas/Estimation'
+      $ref: "#/components/schemas/Estimation"
     response.Conflict:
       type: object
       properties:
@@ -856,7 +857,7 @@ components:
         - code
       properties:
         code:
-          description: 'Код ошибки'
+          description: "Код ошибки"
           type: string
           enum:
             - out_of_delivery_zone
@@ -865,7 +866,7 @@ components:
             - out_of_working_time
             - other
         details:
-          description: 'Детали ошибки'
+          description: "Детали ошибки"
           type: string
     response.NotFound:
       type: object
@@ -881,9 +882,9 @@ components:
       maxItems: 1000
       minItems: 1
       items:
-        $ref: '#/components/schemas/ClaimsEvent'
+        $ref: "#/components/schemas/ClaimsEvent"
     response.CreateBatch:
-      $ref: '#/components/schemas/BatchID'
+      $ref: "#/components/schemas/BatchID"
     response.EstimateBatch:
       type: object
       required:
@@ -892,16 +893,16 @@ components:
         - total_cost_with_vat
       properties:
         arrival_cost:
-          description: 'Стоимость подачи курьера в копейках'
+          description: "Стоимость подачи курьера в копейках"
           type: integer
           example: 50000
         distance_cost:
-          description: 'Стоимость расстояния от точки А до конечной точки доставки в копейках'
+          description: "Стоимость расстояния от точки А до конечной точки доставки в копейках"
           additionalProperties: true
           type: integer
           example: 15000
         weight_cost:
-          description: 'Стоимость общего веса товаров в заказе в копейках'
+          description: "Стоимость общего веса товаров в заказе в копейках"
           additionalProperties: true
           type: integer
           example: 3000
@@ -914,7 +915,7 @@ components:
           type: integer
           example: 250000
     response.GetBatch:
-      $ref: '#/components/schemas/Batch'
+      $ref: "#/components/schemas/Batch"
     response.GetBatches:
       type: object
       required:
@@ -925,7 +926,7 @@ components:
           maxItems: 1000
           minItems: 1
           items:
-            $ref: '#/components/schemas/Batch'
+            $ref: "#/components/schemas/Batch"
     ClaimID:
       type: string
       format: uuid
@@ -981,9 +982,9 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/ClaimStatus'
+          $ref: "#/components/schemas/ClaimStatus"
         cancel_reason:
-          $ref: '#/components/schemas/CancelReason'
+          $ref: "#/components/schemas/CancelReason"
     CourierInfo:
       required:
         - name
@@ -1019,9 +1020,9 @@ components:
           description: |
             Номер заказа в системе партнера, по которому курьер сможет получить его в магазине.
         items:
-          $ref: '#/components/schemas/Items'
+          $ref: "#/components/schemas/Items"
         due_time:
-          $ref: '#/components/schemas/DateTime'
+          $ref: "#/components/schemas/DateTime"
         cooking_ready_time:
           allOf:
             - $ref: "#/components/schemas/DateTime"
@@ -1033,18 +1034,18 @@ components:
           maxItems: 2
           uniqueItems: true
           items:
-            $ref: '#/components/schemas/RoutePoint'
+            $ref: "#/components/schemas/RoutePoint"
         state:
-          $ref: '#/components/schemas/ClaimState'
+          $ref: "#/components/schemas/ClaimState"
         courier_info:
-          $ref: '#/components/schemas/CourierInfo'
+          $ref: "#/components/schemas/CourierInfo"
         estimation:
-          $ref: '#/components/schemas/Estimation'
+          $ref: "#/components/schemas/Estimation"
         need_return:
-          description: 'Нужна ли обратная доставка в случае, если заказ доставить не удалось'
+          description: "Нужна ли обратная доставка в случае, если заказ доставить не удалось"
           type: boolean
         need_drop_off_code:
-          description: 'Нужен ли код подтверждения в точке Б'
+          description: "Нужен ли код подтверждения в точке Б"
           type: boolean
         need_pickup_code:
           description: |
@@ -1053,7 +1054,7 @@ components:
             если он указан в поле transfer_code для точки получения заказа. В таком случае курьер называет код вслух
           type: boolean
         is_bag_required:
-          description: 'Нужен ли курьер с термо-сумкой'
+          description: "Нужен ли курьер с термо-сумкой"
           type: boolean
         comment:
           type: string
@@ -1066,7 +1067,7 @@ components:
         items:
           weight: 1000
           cost: 100
-        due_time: '2023-12-01T15:04:20Z'
+        due_time: "2023-12-01T15:04:20Z"
         route_points:
           - address:
               full_name: Москва, Садовническая набережная, 79
@@ -1076,15 +1077,15 @@ components:
               comment: Магазин
             contact:
               phone: "+78005553535"
-            transfer_code: '1234'
+            transfer_code: "1234"
             point_type: source
           - address:
               full_name: Москва, Таганская улица, 24с5
               coordinates:
                 lat: 55.739792
                 lon: 37.661455
-              floor: '3'
-              flat: '10'
+              floor: "3"
+              flat: "10"
               porch: A
               door_code: 54В8228
               comment: Оставьте у двери
@@ -1095,10 +1096,10 @@ components:
             point_type: destination
         comment: Заказ очень срочный
         state:
-            status: cancelled_by_service
-            cancel_reason:
-              code: performer_not_found
-              message: "Не удалось найти курьера"
+          status: cancelled_by_service
+          cancel_reason:
+            code: performer_not_found
+            message: "Не удалось найти курьера"
 
         meta:
           external_order_uuid: "5f2c5ffa-0736-4677-b203-0250e346e906"
@@ -1145,25 +1146,21 @@ components:
           type: integer
           minimum: 0
           maximum: 100000
-          x-oapi-codegen-extra-tags:
-            validate: required,lte=100000,gte=0
           example: 1000
         items_info:
           description: "Список товаров."
           type: array
           items:
-            $ref: '#/components/schemas/BatchItemInfo'
+            $ref: "#/components/schemas/BatchItemInfo"
         cost:
           description: "Стоимость в копейках."
           type: integer
           example: 250000
           minimum: 0
           maximum: 2147483647
-          x-oapi-codegen-extra-tags:
-            validate: gte=0,lt=2147483647
     BatchItemInfo:
       allOf:
-        - $ref: '#/components/schemas/ItemInfo'
+        - $ref: "#/components/schemas/ItemInfo"
         - type: object
           required:
             - route_point_id
@@ -1188,7 +1185,7 @@ components:
           description: "Список товаров."
           type: array
           items:
-            $ref: '#/components/schemas/ItemInfo'
+            $ref: "#/components/schemas/ItemInfo"
         cost:
           description: "Стоимость в копейках."
           type: integer
@@ -1240,23 +1237,23 @@ components:
           example: 250000
         estimated_arrival:
           type: string
-          description: 'Ожидаемое время доставки в формате (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)'
-          example: '2023-03-20T15:04:05Z'
+          description: "Ожидаемое время доставки в формате (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)"
+          example: "2023-03-20T15:04:05Z"
           format: date-time
         expected_courier_arrival:
           type: string
-          description: 'Ожидаемое время прибытия курьера за заказом (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)'
-          example: '2023-03-20T15:04:05Z'
+          description: "Ожидаемое время прибытия курьера за заказом (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)"
+          example: "2023-03-20T15:04:05Z"
           format: date-time
         pickup_eta:
           type: string
-          description: 'Ожидаемое время прибытия курьера за заказом (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)'
-          example: '2023-03-20T15:04:05Z'
+          description: "Ожидаемое время прибытия курьера за заказом (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)"
+          example: "2023-03-20T15:04:05Z"
           format: date-time
         drop_off_eta:
           type: string
-          description: 'Ожидаемое время прибытия курьера на адрес доставки (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)'
-          example: '2023-03-20T15:04:05Z'
+          description: "Ожидаемое время прибытия курьера на адрес доставки (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)"
+          example: "2023-03-20T15:04:05Z"
           format: date-time
         final_cost:
           description: "Финальная стоимость доставки в копейках"
@@ -1283,13 +1280,13 @@ components:
       type: object
       properties:
         point_type:
-          $ref: '#/components/schemas/RoutePointType'
+          $ref: "#/components/schemas/RoutePointType"
         address:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
         contact:
-          $ref: '#/components/schemas/Contact'
+          $ref: "#/components/schemas/Contact"
         transfer_code:
-          $ref: '#/components/schemas/TransferCode'
+          $ref: "#/components/schemas/TransferCode"
     Address:
       required:
         - coordinates
@@ -1301,7 +1298,7 @@ components:
           description: Полное название с указанием города
           example: "Москва, Садовническая улица, 82с2"
         coordinates:
-          $ref: '#/components/schemas/Coordinates'
+          $ref: "#/components/schemas/Coordinates"
         floor:
           type: string
           description: Этаж
@@ -1360,23 +1357,23 @@ components:
           type: string
           format: uuid
         claim_id:
-          $ref: '#/components/schemas/ClaimID'
+          $ref: "#/components/schemas/ClaimID"
         event_time:
-          $ref: '#/components/schemas/DateTime'
+          $ref: "#/components/schemas/DateTime"
         event:
           oneOf:
-            - $ref: '#/components/schemas/ClaimsEventStatusChanged'
+            - $ref: "#/components/schemas/ClaimsEventStatusChanged"
     ClaimsEventStatusChanged:
       required:
         - new_status
       type: object
       properties:
         new_status:
-          $ref: '#/components/schemas/ClaimStatus'
+          $ref: "#/components/schemas/ClaimStatus"
         payload:
           oneOf:
-            - $ref: '#/components/schemas/CourierInfo'
-            - $ref: '#/components/schemas/CancelReason'
+            - $ref: "#/components/schemas/CourierInfo"
+            - $ref: "#/components/schemas/CancelReason"
     CancelReason:
       type: object
       description: |
@@ -1387,8 +1384,8 @@ components:
         code:
           type: string
           oneOf:
-            - $ref: '#/components/schemas/CancelByPartnerReasonCode'
-            - $ref: '#/components/schemas/CancelByServiceReasonCode'
+            - $ref: "#/components/schemas/CancelByPartnerReasonCode"
+            - $ref: "#/components/schemas/CancelByServiceReasonCode"
         message:
           type: string
           description: Описание причины отмены.
@@ -1417,7 +1414,7 @@ components:
         - code
       properties:
         code:
-          $ref: '#/components/schemas/CancelByPartnerReasonCode'
+          $ref: "#/components/schemas/CancelByPartnerReasonCode"
         message:
           type: string
           description: Описание причины отмены.
@@ -1456,7 +1453,7 @@ components:
         - route_points
       properties:
         claim_id:
-          $ref: '#/components/schemas/ClaimID'
+          $ref: "#/components/schemas/ClaimID"
         route_points:
           type: array
           description: "Точки получения заказа и назначения."
@@ -1468,7 +1465,7 @@ components:
               - transfer_code
             properties:
               point_type:
-                $ref: '#/components/schemas/RoutePointType'
+                $ref: "#/components/schemas/RoutePointType"
               transfer_code:
                 type: string
                 description: |
@@ -1491,7 +1488,7 @@ components:
         - ready_status
       properties:
         claim_id:
-          $ref: '#/components/schemas/ClaimID'
+          $ref: "#/components/schemas/ClaimID"
         ready_status:
           type: string
           description: |
@@ -1513,7 +1510,7 @@ components:
         - status
       properties:
         claim_id:
-          $ref: '#/components/schemas/ClaimID'
+          $ref: "#/components/schemas/ClaimID"
         status:
           description: |
             Статус обновления по конкретной заявке:
@@ -1525,7 +1522,7 @@ components:
             - error
     BatchRoutePoint:
       allOf:
-        - $ref: '#/components/schemas/RoutePoint'
+        - $ref: "#/components/schemas/RoutePoint"
         - type: object
           required:
             - id
@@ -1550,7 +1547,7 @@ components:
           format: uuid
         eta:
           type: string
-          example: '2023-03-20T15:04:05Z'
+          example: "2023-03-20T15:04:05Z"
           format: date-time
     BatchEstimation:
       type: object
@@ -1568,14 +1565,14 @@ components:
           example: 10000
         pickup_eta:
           type: string
-          description: 'Ожидаемое время прибытия курьера за заказом (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)'
-          example: '2023-03-20T15:04:05Z'
+          description: "Ожидаемое время прибытия курьера за заказом (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)"
+          example: "2023-03-20T15:04:05Z"
           format: date-time
         drop_off_eta:
           type: array
-          description: 'Ожидаемое время прибытия курьера на адрес доставки (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)'
+          description: "Ожидаемое время прибытия курьера на адрес доставки (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)"
           items:
-            $ref: '#/components/schemas/BatchEstimationDropOffETA'
+            $ref: "#/components/schemas/BatchEstimationDropOffETA"
     Batch:
       type: object
       properties:
@@ -1601,28 +1598,28 @@ components:
             - delivered
             - cancelled
         estimation:
-          $ref: '#/components/schemas/BatchEstimation'
+          $ref: "#/components/schemas/BatchEstimation"
         claims:
           type: array
           items:
-            $ref: '#/components/schemas/Claim'
+            $ref: "#/components/schemas/Claim"
       example:
         batch_id: "5f2c5ffa-0736-4677-b203-0250e346e906"
         estimation:
-            final_cost: 20000
-            final_cost_vat: 20000
-            pickup_eta: '2023-12-01T14:30:00Z'
-            drop_off_eta:
-              - claim_id: "order-1"
-                eta: '2023-12-01T15:00:00Z'
-              - claim_id: "order-2"
-                eta: '2023-12-01T15:30:00Z'
+          final_cost: 20000
+          final_cost_vat: 20000
+          pickup_eta: "2023-12-01T14:30:00Z"
+          drop_off_eta:
+            - claim_id: "order-1"
+              eta: "2023-12-01T15:00:00Z"
+            - claim_id: "order-2"
+              eta: "2023-12-01T15:30:00Z"
         claims:
           - external_order_id: "order-1"
             items:
               weight: 1000
               cost: 100
-            due_time: '2023-12-01T15:04:20Z'
+            due_time: "2023-12-01T15:04:20Z"
             route_points:
               - address:
                   full_name: Москва, Садовническая набережная, 79
@@ -1632,7 +1629,7 @@ components:
                   comment: Магазин
                 contact:
                   phone: "+78005553535"
-                transfer_code: '1234'
+                transfer_code: "1234"
                 point_type: source
                 id: 1
               - address:
@@ -1640,8 +1637,8 @@ components:
                   coordinates:
                     lat: 55.739792
                     lon: 37.661455
-                  floor: '3'
-                  flat: '10'
+                  floor: "3"
+                  flat: "10"
                   porch: A
                   door_code: 54В8228
                   comment: Оставьте у двери
@@ -1663,15 +1660,15 @@ components:
             items:
               weight: 1000
               cost: 100
-            due_time: '2023-12-01T15:04:20Z'
+            due_time: "2023-12-01T15:04:20Z"
             route_points:
               - address:
                   full_name: Москва, Таганская улица, 24с5
                   coordinates:
                     lat: 55.739792
                     lon: 37.661455
-                  floor: '3'
-                  flat: '10'
+                  floor: "3"
+                  flat: "10"
                   porch: A
                   door_code: 54В8228
                   comment: Оставьте у двери
@@ -1686,8 +1683,8 @@ components:
                   coordinates:
                     lat: 55.795474
                     lon: 37.614931
-                  floor: '3'
-                  flat: '10'
+                  floor: "3"
+                  flat: "10"
                   porch: A
                   door_code: 54В8228
                   comment: Оставьте у двери
@@ -1705,6 +1702,7 @@ components:
                 message: "Не удалось найти курьера"
             meta:
               external_order_uuid: "5f2c5ffa-0736-4677-b203-0250e346e906"
+
     BatchID:
       type: string
       format: uuid
