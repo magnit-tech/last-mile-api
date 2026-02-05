@@ -47,6 +47,7 @@ paths:
           description: "Internal Server Error"
   /v1/last-mile/claims/create:
     post:
+      summary: Создание заявки на доставку
       description: Создание заявки на доставку
       operationId: CreateClaim
       parameters:
@@ -81,6 +82,7 @@ paths:
   /v1/last-mile/claims/cancel:
     post:
       description: Отменить заявку
+      summary: Отменить заявку
       operationId: CancelClaim
       requestBody:
         content:
@@ -101,6 +103,7 @@ paths:
   /v1/last-mile/claims/info:
     post:
       description: Информация по заявкам
+      summary: Информация по заявкам
       operationId: ClaimsInfo
       requestBody:
         content:
@@ -137,6 +140,7 @@ paths:
   /v1/last-mile/claims/events:
     get:
       description: События по заявкам
+      summary: События по заявкам
       operationId: ClaimsEvents
       parameters:
         - name: last_known_id
@@ -175,8 +179,9 @@ paths:
           description: Internal Server Error
   /v1/last-mile/claims/accept:
     post:
+      summary: Уакцптовать заявку на доставку
+      description: Принять заявку на доставку после расчета стоимости
       operationId: AcceptClaim
-      description: "Принять заявку на доставку после расчета стоимости"
       requestBody:
         content:
           application/json:
@@ -196,8 +201,11 @@ paths:
   /v1/last-mile/claims/update:
     patch:
       operationId: UpdateClaim
+      summary: Обновить заявку на доставку
       description: |
-        Обновление заявки на доставку. Доступен для source точки до статуса pickup_arrived.Для destination точки доступна до статуса delivery_finished.
+        Обновление заявки на доставку.
+        Доступен для source точки до статуса pickup_arrived.
+        Для destination точки доступна до статуса delivery_finished.
       requestBody:
         content:
           application/json:
@@ -233,7 +241,7 @@ paths:
   /v1/last-mile/claims/set-ready:
     patch:
       operationId: SetReady
-      summary: Set ready to pickup
+      summary: Передать что заказ готов к выдаче
       description: |
         Передать информацию о том что заказ готов к выдаче.
       requestBody:
@@ -267,7 +275,8 @@ paths:
   /v1/last-mile/claims/estimate:
     post:
       operationId: EstimateClaim
-      description: "Оценка заявки"
+      description: Оценка стоимости достави по заявке
+      summary: Оценка заявки
       requestBody:
         content:
           application/json:
@@ -308,7 +317,8 @@ paths:
           description: "Internal Server Error"
   /v1/last-mile/pretensions:
     post:
-      description: "Создать претензию"
+      description: Создать претензию
+      summary: Создать претензию
       requestBody:
         content:
           multipart/form-data:
@@ -330,7 +340,8 @@ paths:
   /v1/last-mile/courier/location:
     get:
       operationId: CourierLocation
-      description: "Получить координаты курьера по заявке"
+      description: Получить координаты курьера по заявке
+      summary: Получить координаты курьера
       parameters:
         - in: query
           name: claimId
@@ -362,7 +373,8 @@ paths:
   /v1/last-mile/batches:
     get:
       operationId: GetBatchesInfo
-      description: "Получение информации по маршрутным заявкам"
+      description: Получение информации по маршрутным заявкам
+      summary: Получить информацию по маршрутным заявкам
       parameters:
         - $ref: "#/components/parameters/query.BatchIDs"
         - $ref: "#/components/parameters/query.From"
@@ -398,7 +410,8 @@ paths:
                 type: string
     post:
       operationId: CreateBatch
-      description: "Создание маршрутной заявки на доставку"
+      description: Создание маршрутной заявки на доставку
+      summary: Создание маршрутной заявки на доставку
       parameters:
         - in: query
           name: request_id
@@ -406,8 +419,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/param.IdempotencyKey"
-          x-oapi-codegen-extra-tags:
-            validate: required,gt=10,lt=100
       requestBody:
         content:
           application/json:
@@ -452,7 +463,8 @@ paths:
   /v1/last-mile/batches/{batch_id}:
     get:
       operationId: GetBatchByID
-      description: "Получение информации по маршрутной заявке"
+      description: Получение информации по маршрутной заявке
+      summary: Получить информацию по маршрутной заявке
       parameters:
         - $ref: "#/components/parameters/path.BatchID"
       responses:
@@ -483,7 +495,8 @@ paths:
   /v1/last-mile/batches/{batch_id}/accept:
     post:
       operationId: AcceptBatch
-      description: "Подтверждение маршрутной заявки"
+      description: Подтверждение маршрутной заявки
+      summary: Подтвердить доставку по маршрутной заявке
       parameters:
         - $ref: "#/components/parameters/path.BatchID"
       responses:
@@ -522,7 +535,8 @@ paths:
   /v1/last-mile/batches/estimate:
     post:
       operationId: EstimateBatch
-      description: "Оценка маршрутной заявки"
+      description: Оценка стоимости доставки по маршрутной заявке
+      summary: Оценка маршрутной заявки
       requestBody:
         content:
           application/json:
@@ -708,7 +722,8 @@ components:
       maxItems: 100
       items:
         $ref: "#/components/schemas/SetReady"
-    request.EstimateClaim:
+
+    response.EstimateClaim:
       type: object
       properties:
         cost:
@@ -823,8 +838,6 @@ components:
       maxItems: 100
       items:
         $ref: "#/components/schemas/UpdateClaimStatus"
-    response.EstimateClaim:
-      $ref: "#/components/schemas/Estimation"
     response.Conflict:
       type: object
       properties:
