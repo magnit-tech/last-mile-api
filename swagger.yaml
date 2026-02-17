@@ -752,6 +752,14 @@ components:
           type: string
           example: 2026-02-05T15:04:20Z
           description: "Ожидаемое время доставки в формате (RFC3339 формат : %Y-%M-%DT%h:%m:%sZ)"
+        final_cost:
+          description: "Финальная стоимость доставки в копейках"
+          type: integer
+          example: 350000
+        final_cost_with_vat:
+          description: "Финальная стоимость доставки в копейках (с учетом НДС)"
+          type: integer
+          example: 350000
 
     request.CreateBatch:
       type: object
