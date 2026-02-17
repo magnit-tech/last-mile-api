@@ -3,7 +3,7 @@ info:
   title: Last Mile OMS service API
   description: Last Mile OMS service API
   contact: {}
-  version: 0.5.4
+  version: 0.5.5
 servers:
   - url: https://b2b-api-gateway.uat.ya.magnit.ru/api/
     description: Демо сервер для проведения тестирования интеграции.
@@ -1079,6 +1079,10 @@ components:
         is_bag_required:
           description: "Нужен ли курьер с термо-сумкой"
           type: boolean
+        leave_at_door:
+          description: "Оставить заказ у двери"
+          type: boolean
+          default: false
         comment:
           type: string
           description: Комментарий к заказу
