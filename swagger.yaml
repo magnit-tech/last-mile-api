@@ -3,7 +3,7 @@ info:
   title: Last Mile OMS service API
   description: Last Mile OMS service API
   contact: {}
-  version: 0.5.5
+  version: 0.5.6
 servers:
   - url: https://b2b-api-gateway.uat.ya.magnit.ru/api/
     description: Демо сервер для проведения тестирования интеграции.
@@ -583,6 +583,49 @@ paths:
             application/json:
               schema:
                 type: string
+
+  /v1/last-mile/claims/list:
+    get:
+      operationId: ClaimsList
+      description: Cписок заявок
+      summary: Получить список заявок
+      parameters:
+        - $ref: "#/components/parameters/query.ClaimIDs"
+        - $ref: "#/components/parameters/query.ExternalOrderIDs"
+        - $ref: "#/components/parameters/query.ClaimStatuses"
+        - $ref: "#/components/parameters/query.From"
+        - $ref: "#/components/parameters/query.To"
+        - $ref: "#/components/parameters/query.Page"
+        - $ref: "#/components/parameters/query.PageSize"
+        - $ref: "#/components/parameters/query.OrderByApi"
+        - $ref: "#/components/parameters/query.OrderDirection"
+        - $ref: '#/components/parameters/query.BatchIDs'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response.ClaimsList'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response.BadRequest'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response.NotFound'
+        '500':
+          description: 'Internal Server Error'
+          content:
+            application/json:
+              schema:
+                type: string
+
 components:
   parameters:
     query.BatchIDs:
@@ -657,6 +700,45 @@ components:
         enum:
           - asc
           - desc
+    query.ClaimIDs:
+      in: query
+      name: claimIDs
+      description: "Внутренний идентификатор заказа."
+      schema:
+        type: array
+        items:
+          $ref: "#/components/schemas/ClaimID"
+    query.ExternalOrderIDs:
+      in: query
+      name: externalOrderIDs
+      description: "Идентификатор заказа в системе партнера."
+      schema:
+        type: array
+        items:
+          type: string
+
+    query.ClaimStatuses:
+      in: query
+      name: claimStatuses
+      description: "Статус заявки"
+      schema:
+        type: array
+        items:
+          $ref: "#/components/schemas/ClaimStatus"
+    query.OrderByApi:
+      in: query
+      name: orderBy
+      description: 'Отсортировать вывод по'
+      schema:
+        type: string
+        enum:
+          - created_at
+          - external_order_id
+          - claim_status
+          - cost
+      x-oapi-codegen-extra-tags:
+        validate: omitempty,oneof=created_at external_order_id claim_status cost
+
   schemas:
     param.IdempotencyKey:
       type: string
@@ -958,6 +1040,16 @@ components:
           minItems: 1
           items:
             $ref: "#/components/schemas/Batch"
+    response.ClaimsList:
+      type: object
+      required:
+        - claims
+      properties:
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Claim'
+
     ClaimID:
       type: string
       format: uuid
