@@ -322,6 +322,47 @@ paths:
                 $ref: "#/components/schemas/response.UnprocessableClaim"
         "500":
           description: "Internal Server Error"
+  /v1/last-mile/claims/list:
+    get:
+      operationId: ClaimsList
+      description: Cписок заявок
+      summary: Получить список заявок
+      parameters:
+        - $ref: "#/components/parameters/query.ClaimIDs"
+        - $ref: "#/components/parameters/query.ExternalOrderIDs"
+        - $ref: "#/components/parameters/query.ClaimStatuses"
+        - $ref: "#/components/parameters/query.From"
+        - $ref: "#/components/parameters/query.To"
+        - $ref: "#/components/parameters/query.Page"
+        - $ref: "#/components/parameters/query.PageSize"
+        - $ref: "#/components/parameters/query.OrderByApi"
+        - $ref: "#/components/parameters/query.OrderDirection"
+        - $ref: '#/components/parameters/query.BatchIDs'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response.ClaimsList'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response.BadRequest'
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response.NotFound'
+        '500':
+          description: 'Internal Server Error'
+          content:
+            application/json:
+              schema:
+                type: string
   /v1/last-mile/pretensions:
     post:
       description: Создать претензию
@@ -584,54 +625,16 @@ paths:
               schema:
                 type: string
 
-  /v1/last-mile/claims/list:
-    get:
-      operationId: ClaimsList
-      description: Cписок заявок
-      summary: Получить список заявок
-      parameters:
-        - $ref: "#/components/parameters/query.ClaimIDs"
-        - $ref: "#/components/parameters/query.ExternalOrderIDs"
-        - $ref: "#/components/parameters/query.ClaimStatuses"
-        - $ref: "#/components/parameters/query.From"
-        - $ref: "#/components/parameters/query.To"
-        - $ref: "#/components/parameters/query.Page"
-        - $ref: "#/components/parameters/query.PageSize"
-        - $ref: "#/components/parameters/query.OrderByApi"
-        - $ref: "#/components/parameters/query.OrderDirection"
-        - $ref: '#/components/parameters/query.BatchIDs'
-      responses:
-        '200':
-          description: 'OK'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/response.ClaimsList'
-        '400':
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/response.BadRequest'
-        '404':
-          description: 'Not Found'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/response.NotFound'
-        '500':
-          description: 'Internal Server Error'
-          content:
-            application/json:
-              schema:
-                type: string
-
 components:
   parameters:
     query.BatchIDs:
       in: query
       name: batch_ids
-      description: "Идентификатор маршрутной заявки."
+      description: "Массив идентификаторов маршрутных заявок."
+      required: false
+      example:
+        - 123e4567-e89b-12d3-a456-426614174000
+        - 123e4567-e89b-12d3-a456-426614174001
       schema:
         type: array
         minItems: 1
@@ -643,6 +646,7 @@ components:
     path.BatchID:
       in: path
       name: batch_id
+      example: 123e4567-e89b-12d3-a456-426614174000
       description: "Идентификатор маршрутной заявки."
       required: true
       schema:
@@ -651,32 +655,47 @@ components:
       in: query
       name: from
       description: "Время создания от"
+      required: false
+      example: 2023-03-20T15:04:05Z
       schema:
         $ref: "#/components/schemas/DateTime"
     query.To:
       in: query
       name: to
       description: "Время создания до"
+      required: false
+      example: 2023-03-20T15:04:05Z
       schema:
         $ref: "#/components/schemas/DateTime"
     query.Page:
       in: query
       name: page
       description: "Номер страницы"
+      required: false
+      example: 50
       schema:
         type: integer
+        minimum: 1
+        default: 50
     query.PageSize:
       in: query
       name: pageSize
-      description: "Номер страницы"
+      description: "Размер страницы"
+      required: false
+      example: 100
       schema:
         type: integer
+        minimum: 1
+        maximum: 500
     query.OrderBy:
       in: query
       name: orderBy
       description: "Отсортировать вывод по"
+      required: false
+      example: created_at
       schema:
         type: string
+        default: created_at
         enum:
           - created_at
           - external_order_id
@@ -687,6 +706,7 @@ components:
       name: orderBy
       description: "Отсортировать вывод по дате создания"
       required: false
+      example: created_date
       schema:
         type: string
         enum:
@@ -695,15 +715,22 @@ components:
       in: query
       name: orderDirection
       description: "Отсортировать вывод по возрастанию/убыванию"
+      required: false
+      example: asc
       schema:
         type: string
+        default: asc
         enum:
           - asc
           - desc
     query.ClaimIDs:
       in: query
       name: claimIDs
-      description: "Внутренний идентификатор заказа."
+      description: "Массив внутренних идентификаторов заказов."
+      required: false
+      example:
+        - 123e4567-e89b-12d3-a456-426614174000
+        - 123e4567-e89b-12d3-a456-426614174001
       schema:
         type: array
         items:
