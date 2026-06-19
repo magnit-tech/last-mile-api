@@ -912,9 +912,10 @@ components:
         meta:
           oneOf:
             - $ref: "#/components/schemas/Meta"
-        partner_id:
-          description: "Идентификатор партнера из ГИС КЦ"
-          type: string
+        leave_at_door:
+          description: 'Оставить заказ у двери'
+          type: boolean
+          default: false
 
     request.EstimateBatch:
       type: object
